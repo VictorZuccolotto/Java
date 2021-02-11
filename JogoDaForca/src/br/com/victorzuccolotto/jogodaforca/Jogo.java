@@ -6,37 +6,37 @@ public class Jogo {
 
 	public void jogada(Palavras plvrs, Vida vida) {
 		while (true) {
-			if(!plvrs.verificaPalavra(lerDoTeclado()))
+			progresso(plvrs, vida);
+			if(!plvrs.verificaPalavra(lerDoTeclado(plvrs)))
 				vida.diminui();
 			if(plvrs.verificaVitoria() || vida.verificaVida(plvrs))
 				break;
-			progresso(plvrs, vida);
 		}
 
 	}
 
 	private void progresso(Palavras plvrs, Vida vida) {
 		System.out.println(plvrs.palavraCensurada);
-		System.out.println("Voce tem mais " + (vida.QuantidadeDeVidas) +" chances");
+		System.out.println("Voce tem " + (vida.QuantidadeDeVidas) +" chances de erro");
 	}
 
-	public char lerDoTeclado() {
+	public char lerDoTeclado(Palavras plvrs) {
+		System.out.println("Caracteres usados: " + plvrs.letrasUsadas);
 		Scanner scan = new Scanner(System.in);
 		String sc = scan.next();
 		try {
 			if (sc.length() > 1) {
-				extracted();
+				throw new Exception("Digite somente um caractere");
 			}
+			if(plvrs.letrasUsadas.contains(sc.charAt(0)))
+				throw new Exception("Esse caractere ja foi utilizado");
 		} catch (Exception e) {
-			System.out.println("Digite somente um caractere");
-			this.lerDoTeclado();
+			System.out.println(e.getMessage());
+			this.lerDoTeclado(plvrs);
 		}
 //		scan.close();
+		
 		return sc.charAt(0);
-	}
-
-	private void extracted() throws Exception {
-		throw new Exception();
 	}
 
 	public static void main(String[] args) {
