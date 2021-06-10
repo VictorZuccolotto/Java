@@ -4,12 +4,11 @@ import java.sql.SQLException;
 
 import javax.swing.JFrame;
 
-import me.dedin.view.TelaPrincipal;
-import me.dedin.view.TelaRemedios;
+import me.dedin.view.Tela;
 
 public class Teste {
 	public static void main(String[] args) throws SQLException {
-		TelaPrincipal tela = new TelaPrincipal();
-//		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Tela tela = new Tela();
+		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
